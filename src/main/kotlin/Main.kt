@@ -13,7 +13,7 @@ fun main() {
 
     while (accountType == ""){
         println("Choose an option (1,2 or 3)")
-        userChoice = (1..5).random()
+        userChoice = readln().toInt()
         println("The selected option is...$userChoice")
 
         when (userChoice) {
