@@ -1,5 +1,7 @@
 package org.example
 
+import jdk.jfr.DataAmount
+
 fun main() {
 
     var accountType: String = ""
@@ -25,6 +27,79 @@ fun main() {
 
         println("You have created a $accountType account")
      }
+
+    println("Enter account balance")
+    var accountBalance: Int = readln().toInt()
+    println("The current balance is $accountBalance dollars.")
+
+    println("Enter the amount of money")
+    val money: Int = readln().toInt()
+    println("The amount you transferred is $money dollars.")
+
+    var output = 0
+
+    fun withdraw(ammount: Int): Int {
+        accountBalance -= ammount
+        println("You withdraw $ammount and have a balance of $accountBalance")
+        return ammount
+    }
+
+    //Prueba operacion retiro cuentas generica y credito
+    output = withdraw(money)
+    println("The amount you withdrew is ${output} dollars.")
+
+    fun debitWithdraw(amount: Int): Int{
+        if (accountBalance == 0){
+            println("Can't withdraw, no money on this account!")
+            return  accountBalance
+        }
+        else if (amount > accountBalance){
+            println("Not enough money on this account! The checking balance is ${accountBalance} dollars.")
+            return 0
+        }
+        else{
+            return withdraw(amount)
+        }
+
+    }
+
+    //Prueba operacion retiro cuentas debito
+    output = debitWithdraw(money)
+    println("The amount you withdrew is ${output} dollars.")
+
+    fun deposit(amount: Int): Int{
+        accountBalance += amount
+        println("You successfully deposited ${amount} dollars. The current balance is ${accountBalance} dollars.")
+        return amount
+    }
+
+    output = deposit(money)
+    println("The amount you deposited is ${output} dollars.")
+
+    fun creditDeposit(amount: Int): Int{
+        if(accountBalance == 0){
+            println("This account is completely paid off! Do not deposit money!")
+            return  accountBalance
+        }
+
+        else if(accountBalance + amount >0){
+            println("Deposit failed, you tried to pay off an amount greater than the credit balance. The checking balance is $accountBalance dollars")
+            return 0
+        }
+
+        else if(amount == -accountBalance){
+            accountBalance = 0
+            println{"You have paid off this account!"}
+            return amount
+        }
+        else{
+            return deposit(amount)
+        }
+    }
+
+    output = creditDeposit(money)
+    println("The amount you deposited is ${output} dollars.")
+
 
 
 }
