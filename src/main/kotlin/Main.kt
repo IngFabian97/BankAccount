@@ -16,23 +16,11 @@ fun main() {
         userChoice = (1..5).random()
         println("The selected option is...$userChoice")
 
-        when {
-            userChoice <= 1 ->
-                {
-                    accountType = "debit"
-                }
-            userChoice <= 2 ->
-                {
-                    accountType = "credit"
-                }
-            userChoice <= 3 ->
-                {
-                    accountType = "checking"
-                }
-            else ->
-                {
-                    continue
-                }
+        when (userChoice) {
+            1 -> accountType = "debit"
+            2 -> accountType = "credit"
+            3 -> accountType = "checking"
+            else -> continue
         }
 
         println("You have created a $accountType account")
